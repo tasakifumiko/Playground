@@ -1,0 +1,41 @@
+<%# if @post.image.attached? %>
+  <%# @post.image.each do |image| %>
+      <div class="col-10 mt-3 mx-auto"><%= image_tag @post.get_image, class: "img-fluid" %>
+<!--  <%# end %>-->
+<!--<%# end %>-->
+  <div class="card-body">
+    <small class="text-right text-black-50">
+      <%= @post.created_at.strftime('%Y/%m/%d') %>
+    </small>
+    <br>
+    <h6 class="title font-weight-bold mb-3">
+      <%= @post.title %>
+    </h6>
+    <div class="text">
+      <%= image_tag @post.user.get_profile_image(30,30), class: 'rounded-circle' %>
+      <%= @post.user.user_name %>
+      <div class="my-3">ここは『<%= @post.playground %>』</div>
+      <div class="mb-3">
+        <%= @post.genre.name %> | <%= @post.area.name %>
+      </div>
+    </div>
+    <!-- 星評価　-->
+    <div id="rate_<%= @post.id %>"></div>
+    <script>
+      document.getElementById('rate_<%= @post.id %>').innerHTML = '';
+      raty(document.getElementById('rate_<%= @post.id %>'), {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: 3
+      })
+    </script><!-- 星評価終了-->
+    <div class= "text">
+      <%= @post.text %>
+  </div>
+  <% if @post.user == current_user %>
+         <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success" %></td>
+         <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+           <% end %>
+</div>
