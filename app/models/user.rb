@@ -5,10 +5,23 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_posts, through: :bookmarks, source: :post
   has_one_attached :profile_image, dependent: :destroy
 
+   
+   
    def get_profile_image(width, height)
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
-    profile_image.variant(resize_to_limit: [width, height]).processed
+      unless profile_image.attached?
+        file_path = Rails.root.join('app/assets/images/no_image.jpg')
+        profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      end
+     profile_image.variant(resize_to_limit: [width, height]).processed
    end
+   
+   def bookmark_by?(post)
+     self.bookmarks.exists?(post_id: post.id)
+   end
+   
 end
