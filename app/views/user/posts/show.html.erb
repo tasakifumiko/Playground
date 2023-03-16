@@ -1,0 +1,89 @@
+<div class="h-100 d-flex flex-column align-items-center justify-content-center">
+    <% if @post.images.attached? %>
+      <div class= "photos">
+        <% @post.images.each do |image| %>
+            <div class="photo">
+              <%= image_tag image.variant(resize_to_limit: [300, 300]), class: "img-fluid" %>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+          <div class="card-body">
+            <small class="text-right text-black-50">
+              <%= @post.created_at.strftime('%Y/%m/%d') %>
+            </small>
+            <br>
+            <h6 class="title font-weight-bold mb-3">
+              <%= @post.title %>
+            </h6>
+            <div class="text">
+              <%= image_tag @post.user.get_profile_image(30,30), class: 'rounded-circle' %>
+              <%= @post.user.user_name %>
+              <div class="my-3">ここは『<%= @post.playground %>』
+                  <% if current_user.bookmark_by?(@post) %>
+                      <%= link_to post_bookmarks_path(@post), method: :delete do %>
+                        <i class="fa-solid fa-bookmark"></i>
+                      <% end %>
+                  <% else %>
+                      <%= link_to post_bookmarks_path(@post), method: :post do %>
+                        <i class="fa-regular fa-bookmark"></i>
+                      <% end %>
+                  <% end %>
+              </div>
+              <div class="mb-3">
+                <%= @post.genre.name %> | <%= @post.area.name %>
+              </div>
+              <div class= "text">
+                <%= @post.text %>
+              </div>
+               <p>
+                <% if @post.user == current_user %>
+                       <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success" %></td>
+                       <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+                <% else %>
+                  <%= form_with model: [@post, @review] do |f| %>
+
+               <div>
+                  コメント件数：<%= @post.reviews.count %>
+                  <% @post.reviews.each do |review| %>
+                    <p><%= image_tag review.user.get_profile_image(30,30), class: 'rounded-circle' %><%= review.user.user_name %>
+                    <small class="text-black-50"><%= review.created_at.strftime('%Y/%m/%d') %></small><br>
+                    <%= review.comment %><br>
+                     <!--星評価　-->
+                    <div class="rate_view" data-score="<%=review.score%>"></div></p>
+                <% end %>
+                
+                    <script>
+                    $(document).on('turbolinks:load', function () {
+                      $('.rate_view').empty(); 
+                      let elements = document.getElementsByClassName('rate_view');
+                      for( let i = 0;i < elements.length; i++) {
+                        let element = elements[i];
+                        raty(element, {
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>",
+                          readOnly: true,
+                          score: function() {
+                            return $(this).attr('data-score');
+                          },
+                        });
+                    　}
+                    });
+                    </script>
+                </div>
+
+          <div class="form-group row">
+            <p><%= f.label :score, '評価:', class: 'col-form-label' %>
+              <div id="score"></div>
+            <%= f.text_area :comment, rows: 10, class: "form-control", placeholder: "コメントをここに" %>
+          </div>
+          <div class="col-md-6 offset-md-4">
+                <%= f.submit '投稿する', class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+   </div>
+</div>

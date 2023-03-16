@@ -1,0 +1,57 @@
+<div class="h-100 d-flex flex-column align-items-center justify-content-center">
+    <% if @post.images.attached? %>
+      <div class= "photos">
+        <% @post.images.each do |image| %>
+            <div class="photo">
+              <%= image_tag image.variant(resize_to_limit: [300, 300]), class: "img-fluid" %>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+          <div class="card-body">
+            <small class="text-right text-black-50">
+              <%= @post.created_at.strftime('%Y/%m/%d') %>
+            </small>
+            <br>
+            <h6 class="title font-weight-bold mb-3">
+              <%= @post.title %>
+            </h6>
+            <div class="text">
+                <%= image_tag @post.user.get_profile_image(30,30), class: 'rounded-circle' %>
+                <%= @post.user.user_name %>
+                <div class="my-3">ここは『<%= @post.playground %>』
+            </div>
+            <div class="mb-3">
+                <%= @post.genre.name %> | <%= @post.area.name %>
+            </div>
+            </div>
+            <div class= "text">
+              <%= @post.text %>
+        　　  </div>
+        　   <div>
+              コメント件数：<%= @post.reviews.count %>
+              <% @post.reviews.each do |review| %>
+                <p><%= image_tag review.user.get_profile_image(30,30), class: 'rounded-circle' %><%= review.user.user_name %>
+                <small class="text-black-50"><%= review.created_at.strftime('%Y/%m/%d') %></small><br>
+                <%= review.comment %><br>
+                 <!--星評価　-->
+                <div class="rate_view" data-score="<%=review.score%>"></div></p>
+                <script>
+                  let elements = document.getElementsByClassName('rate_view');
+                  for( let i = 0;i < elements.length; i++) {
+                    let element = elements[i];
+                    raty(element, {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>",
+                      readOnly: true,
+                      score: function() {
+                        return $(this).attr('data-score');
+                      },
+                    });
+                  }
+                </script>
+            　<% end %>
+            </div>
+   </div>
+</div>

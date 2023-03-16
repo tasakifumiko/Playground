@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: 'Montserrat', 'Zen Maru Gothic', sans-serif !important;
+  padding-top: 56px;
+  padding-bottom: 40px;
+}
+
+footer {
+  background-color: #f0f0f0;
+}
+
+.photos{
+  display: flex;
+  justify-content: center;
+}
+
+
+.photo{
+  margin: 10px;
+}

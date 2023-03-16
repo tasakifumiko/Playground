@@ -1,0 +1,52 @@
+<div class="row">
+  <% posts.each do |post| %>
+    <div class="col-md-4">
+      <a href="/admin/posts/<%= post.id %>" class="card-body text-dark">
+
+      <div class="card">
+        <%= image_tag post.get_image[0], class: 'img-fluid card-img-top user-show-card-img' %>
+        <div class="card-body">
+          <h6 class="card-title font-weight-bold mb-3">
+            <%= post.title %>
+          </h6>
+          <div class="card-text">
+            <%= image_tag post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+            <%= post.user.user_name %>
+            <div class="my-3">
+              <%= post.playground %></div>
+            <div class="mb-3">
+              <%= post.genre.name %> | <%= post.area.name %>
+            </div>
+          </div>
+           <div class="rate_view" data-score="<%=post.reviews.average(:score).to_f.round(1)%>"></div>
+        </div>
+        <div class="card-footer text-right">
+          <small class="text-black-50">
+            <%= post.created_at.strftime('%Y/%m/%d') %>
+          </small>
+        </div>
+      </div><!-- card end -->
+      </a>
+    </div>
+  <% end %>       
+           
+   <!--星評価のスクリプト-->
+    <script>
+      $(document).on('turbolinks:load', function () {
+        $('.rate_view').empty(); 
+         let elements = document.getElementsByClassName('rate_view');
+           for( let i = 0;i < elements.length; i++) {
+            let element = elements[i];
+            raty(element, {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              readOnly: true,
+              score: function() {
+                return $(this).attr('data-score');
+              },
+            });
+          }
+      });
+    </script>
+</div
