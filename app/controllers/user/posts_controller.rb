@@ -1,5 +1,5 @@
 class User::PostsController < ApplicationController
-  before_action :authenticate_user!
+   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
 
@@ -20,14 +20,16 @@ class User::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @post_new = Post.new
+    @review= Review.new
   end
 
   def index
     @posts = Post.all
     @post = Post.new
+    @post_genre = @posts.where(genre: params[:genre])
   end
-  
+
+
   def edit
   end
 
@@ -39,23 +41,26 @@ class User::PostsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @post =Post.find(params[:id])
     @post.destroy
     redirect_to user_path(current_user), notice: "投稿を削除しました"
-  end  
-    
-  private
-  
-  def post_params
-    params.require(:post).permit(:playground, :title, :image, :text, :genre_id, :area_id, :score)
   end
-  
+
+
+
+
+  private
+
+  def post_params
+    params.require(:post).permit(:playground, :title, :text, :genre_id, :area_id, images: [] )
+  end
+
   def ensure_correct_user
     @post= Post.find(params[:id])
     unless @post.user == current_user
       redirect_to books_path
     end
-  end 
+  end
 end

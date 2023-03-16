@@ -38,29 +38,37 @@
 
     <%#= @post.inspect %>
              <!-- 評価のjavascript -->
-          <script>
-            document.getElementById("score").innerHTML = '';
-            raty(document.getElementById("score"), {
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              starHalf: "<%= asset_path('star-half.png') %>",
-              scoreName: 'review[score]',
-              score: 4.5
-            })
-          </script>
+          <!--<script>-->
+          <!--  document.getElementById("score").innerHTML = '';-->
+          <!--  raty(document.getElementById("score"), {-->
+          <!--    starOn: "<%#= asset_path('star-on.png') %>",-->
+          <!--    starOff: "<%#= asset_path('star-off.png') %>",-->
+          <!--    starHalf: "<%#= asset_path('star-half.png') %>",-->
+          <!--    scoreName: 'review[score]',-->
+          <!--    score: "#{post.reviews.average(:score).to_f.round(1)}",-->
+          <!--  })-->
+          <!--</script>-->
 
           <div class="form-group row">
-            <%= image_tag @post.get_image, class: "img-fluid" %>
             <%= f.label :image, '写真', class: 'col-md-4 col-form-label' %>
               <div class="col-md-6">
                 <%= f.file_field :image, accept: "image/*" %>
               </div>
           </div>
+          
+          <% if @post.images.attached? %>
+            <div class= "photos">
+              <% @post.images.each do |image| %>
+                  <div class="photo">
+                    <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "img-fluid" %>
+                  </div>
+              <% end %>
+            </div>
+          <% end %>
 
           <div class="form-group row">
             <%= f.label :text, 'コメント', class: 'col-md-4 col-form-label' %>
             <%= f.text_area :text, rows: 10, class: "form-control" %>
-              </div>
         　</div>
 
           <div class="form-group row">
@@ -68,6 +76,7 @@
                 <%= f.submit '投稿する', class: "btn btn-success" %>
               </div>
           </div>
+        </div>
           <% end %>
    　 </div>
  　 </div>

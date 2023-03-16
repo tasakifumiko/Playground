@@ -1,1 +1,22 @@
 <h1>Aboutページ</h1>
+
+<div class="sidebar">
+  <section class="popular">
+    <div class="popular-heading common-heading">エリア</div>
+    <%= form_with url: posts_path, method: :get do |f| %>
+  
+  <%#= f.select :genre, options_for_select(Post.genres), include_blank: true %>
+  <%= f.collection_select :area_id, Area.all, :id, :name, { include_blank: "地域を選択" }, { class: "form-control" } %>
+
+  <%= f.submit '検索' %>
+<% end %>
+      
+  </section>
+  <section class="instagram">
+    <h2 class="instagram-heading common-heading">ジャンル</h2>
+      
+  </section>
+  </div>
+  
+  
+        <%= render 'user/users/index', posts: @posts %>

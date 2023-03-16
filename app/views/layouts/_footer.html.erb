@@ -3,6 +3,12 @@
     <div class='row'>
     	<div class='mx-auto'>
         <div class="text-center py-2">
+          <% if admin_signed_in? %>
+          <span><%= link_to 'サイトへ', root_path, class: "btn btn-sm btn-primary" %></span>
+          <% else %>
+          <span><%= link_to '管理人', new_admin_session_path, class: "btn btn-sm btn-primary" %></span>
+          <% end %>
+          </div>
         <small>© All rights reserved by Infratop.Inc.</small>
         </div>
       </div>
