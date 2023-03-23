@@ -1,0 +1,42 @@
+<div class='container px-5 px-sm-0'>
+     <h2 class ="col-md-4 my-3">検索結果一覧</h2>
+       <div class="row"><% @genre.posts.each do |post| %>
+         <div class="col-md-4">
+           <a href="/posts/<% post.id %>" class="card-body text-dark">
+             <div class="card">
+                <%= image_tag post.get_image[0], class: 'img-fluid card-img-top user-show-card-img' %>
+                <!--cardテンプレート-->
+                <div class="card-body">
+                  <h6 class="card-title font-weight-bold mb-3">
+                    <%= post.title %>
+                  </h6>
+                  <div class="card-text">
+                    <%= image_tag post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+                    <%= post.user.user_name %>
+                    
+                      <!--ブックマーク-->
+                       <% if current_user.bookmark_by?(post) %>
+                          <%= link_to post_bookmarks_path(post), method: :delete do %>
+                          <i class="fa-solid fa-bookmark"></i>
+                          <% end %>
+                       <% else %>
+                          <%= link_to post_bookmarks_path(post), method: :post do %>
+                          <i class="fa-regular fa-bookmark"></i>
+                          <% end %>
+                       <% end %>
+                       <!--ブックマーク　end-->
+                       
+                      <%= post.playground %></div>
+                    <div class="mb-3">
+                      <%= post.genre.name %> | <%= post.area.name %>
+                    </div>
+                  </div>
+                  <div class="rate_view" data-score="<%= post.reviews.average(:score).to_f.round(1) %>"></div>
+                </div>
+                <div class="card-footer text-right">
+                  <small class="text-black-50">
+                    <%= post.created_at.strftime('%Y/%m/%d') %>
+                  </small>
+                </div>
+           </div>
+ <% end %><!-- card end -->

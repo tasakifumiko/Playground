@@ -21,12 +21,15 @@ class User::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @review= Review.new
+    @reviews = @post.reviews.where(visible: true)
   end
 
   def index
     @posts = Post.all
     @post = Post.new
     @post_genre = @posts.where(genre: params[:genre])
+    @genre_name = params[:genre_name]
+    
   end
 
 
@@ -47,6 +50,21 @@ class User::PostsController < ApplicationController
     @post.destroy
     redirect_to user_path(current_user), notice: "投稿を削除しました"
   end
+  
+
+  # # コメントが表示指定されているかを判断するメソッド
+  # def comment_state
+  #   ## 【処理内容1】 入力されたemailからアカウントを1件取得
+  #   @comment = Review.find_by(email: params[:customer][:email])
+  #   ## アカウントを取得できなかった場合、このメソッドを終了する
+  #   return if !visible == 
+  #   ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
+  #   if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
+  #     ## 【処理内容3】
+  #     flash[:withdrawal] = "退会済みです。再度ご登録をしてご利用ください。"
+  #       redirect_to new_customer_registration_path
+  #   end
+  # end
 
 
 

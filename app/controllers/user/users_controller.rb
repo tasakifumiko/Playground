@@ -11,11 +11,6 @@ class User::UsersController < ApplicationController
     @bookmarks = current_user.bookmarks.includes(:post)
   end
 
-  # def bookmarks
-  #   @user = User.find(params[:id])
-  #   @bookmark_posts = @user.bookmark_ids.map { |id| Post.find(id) }
-  # end
-
   def edit
     @user = User.find(current_user.id)
   end
@@ -34,5 +29,12 @@ class User::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:full_name, :user_name, :profile_image)
+  end
+  
+  def ensure_correct_user
+    @user= User.find(params[:id])
+    unless @user == current_user
+      redirect_to posts_path
+    end
   end
 end

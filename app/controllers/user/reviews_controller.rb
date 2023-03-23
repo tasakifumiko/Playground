@@ -7,15 +7,15 @@ class User::ReviewsController < ApplicationController
     comment.save
     redirect_to post_path(post)
   end
+  
+  def index
+    @comments = Comment.all
+  end
 
   private
 
   def review_params
     params.require(:review).permit(:comment, :score)
-  end
-  
-  def index
-    @comments = Comment.all
   end
 
 end

@@ -33,7 +33,21 @@
               <% @post.reviews.each do |review| %>
                 <p><%= image_tag review.user.get_profile_image(30,30), class: 'rounded-circle' %><%= review.user.user_name %>
                 <small class="text-black-50"><%= review.created_at.strftime('%Y/%m/%d') %></small><br>
-                <%= review.comment %><br>
+                <%= review.comment %>
+                <div class="form-group row">
+                  <label class="col-3">公開状況ステータス</label>
+                    <%= form_with model: review, url: admin_post_review_path(review.post, review), method: :patch, local:true, class: "container text-center pl-9" do |f| %>
+　                      <%= f.radio_button :visible, true %>
+                        <%= f.label :visible, "表示", class: "mr-3" %>
+                        <%= f.radio_button :visible, false %>
+                        <%= f.label :visible, "非表示" %>
+                  <div class="form-group text-center">
+                          <%= f.submit "変更を保存", class: "btn btn-success btn-sm" %>
+                  </div>
+                    <% end %>
+                </div>
+
+
                  <!--星評価　-->
                 <div class="rate_view" data-score="<%=review.score%>"></div></p>
                 <script>
