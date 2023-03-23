@@ -6,19 +6,16 @@ class Admin::ReviewsController < ApplicationController
   
   def show
     @reviews = Review.find(params[:id])
+    @comments = @review.comments.all
   end
 
-  def toggle_visibility
-    @review = Review.find(params[:id])
-    @review.update(visible: !@review.visible)
-    redirect_to admin_review_path(@review)
+  def update
+    review = Review.find(params[:id])
+    review.update(review_params)
+    redirect_to admin_post_path(review.post.id)
   end
   
-  def toggle_visibility
-    @review = Review.find(params[:id])
-    @review.update(visible: !@review.visible)
-    respond_to do |format|
-      format.js
-    end
+  def review_params
+    params.require(:review).permit(:visible)
   end
 end

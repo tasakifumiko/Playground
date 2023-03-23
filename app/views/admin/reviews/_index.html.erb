@@ -15,6 +15,14 @@
                   <td><%= link_to(review.post_id, admin_post_path(review.post.id)) %></td>
                   <td><%= review.comment %></td>
                   <td><%= review.post.created_at.strftime('%Y/%m/%d') %></td>
+                  <td><% if review.visible == true  %>
+                        <strong class="text-success">公開中</strong>
+                      <% else %>
+                        <strong class="text-denger">非公開</strong>
+                      <% end %>
+                  </td>
+                  
+                  
                 </tr>
               <% end %>
           </tbody>
