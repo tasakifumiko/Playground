@@ -1,0 +1,12 @@
+<!--ブックマーク機能-->
+<!--<div id="bookmark_post_<%#= a_post.id %>">  -->
+  <% if current_user.bookmark_by?(post) %>
+      <%= link_to post_bookmarks_path(post), method: :delete, remote:true do %>
+        <i class="fa-solid fa-bookmark"></i>
+      <% end %>
+  <% else %>
+      <%= link_to post_bookmarks_path(post), method: :post, remote:true do %>
+        <i class="fa-regular fa-bookmark"></i>
+      <% end %>
+  <% end %>
+<!--</div>-->

@@ -1,0 +1,24 @@
+<%= form_with model: [post, review], local: false do |f| %>  
+  <div class="form-group row">
+    <p><%= f.label :score, '評価:', class: 'col-form-label' %>
+      <div id="score"></div>
+    <%= f.text_area :comment, rows: 10, class: "form-control", placeholder: "コメントをここに" %>
+  </div>
+  <div class="col-md-6 offset-md-4">
+        <%= f.submit '投稿する', class: "btn btn-success" %>
+  </div>
+  </div>
+  
+   <script>
+  $(document).on('turbolinks:load', function () {
+    $('#score').empty();
+    let scoreNew = document.getElementById('score');
+      raty(scoreNew, {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        scoreName: 'review[score]'
+      })
+    });
+  </script> 
+<% end %>
