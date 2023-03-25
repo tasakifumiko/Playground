@@ -4,7 +4,6 @@ class Post < ApplicationRecord
   belongs_to :area
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  # has_many :bookmark_posts, through: :bookmarks, source: :post
   has_many_attached :images, dependent: :destroy
 
 
