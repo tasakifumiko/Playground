@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  namespace :admin do
+    get 'areas/index'
+    get 'areas/edit'
+  end
+  namespace :admin do
+    get 'genres/index'
+    get 'genres/edit'
+  end
   devise_for :user, skip: [:passwords], controllers: {
   registrations: "user/registrations",
   sessions: 'user/sessions'
@@ -8,7 +16,6 @@ Rails.application.routes.draw do
   
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  # registrations: "admin/registrations",
   sessions: "admin/sessions"
   }
 
@@ -18,6 +25,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     resources :users, only: [:index, :show, :edit, :update]
+    resources :areas, only: [:index, :create, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update] do
      resources :reviews, only: [:create, :destroy, :index, :show, :update]
     end
@@ -30,6 +39,9 @@ Rails.application.routes.draw do
          resources :reviews, only: [:create, :destroy]
          resource :bookmarks, only: [:create, :destroy]
       end
+      
+      get "users/unsubscribe" => "users#unsubscribe", as:"unsubscribe"
+      patch "users/withdraw" => "users#withdraw", as:"withdraw"
 
       resources :users, only: [:show, :edit, :update] do
         resources :bookmarks, only: [:index, :create, :destroy]
@@ -40,8 +52,8 @@ Rails.application.routes.draw do
 
        resources :genres, only: [:show]
        resources :areas, only: [:show]
-       get "users/unsubscribe" => "users#unsubscribe", as:"unsubscribe"
-       patch "users/withdraw" => "users#withdraw", as:"withdraw"
+       
+       
        get "search" => "searches#search"
        post "filter" => "searches#filter", as: "filter"
   end

@@ -13,10 +13,6 @@ class User::SearchesController < ApplicationController
 
     if params[:keyword].present?
       @posts = Post.where("text like ?", "%" + params[:keyword] + "%")
-      
-#      @post = Post.where(text: params[:keyword])
-#      @posts = Post.where("text like ? and created_at < ? ", "%" + params[:keyword] + "%", Time.current)
-      
     else
       @posts = Post.all
     end

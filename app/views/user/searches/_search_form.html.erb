@@ -1,5 +1,6 @@
-<% @areas.each do |area| %>
-  <div class="tag-box">
-    <%= link_to area.name, area_path(area.id) %></br>
-  </div>
-<% end %>
+<div>
+        <%= form_with url: filter_path, local: true, method: :post do |f| %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "filter", class: ""  %>
+        <% end %>
+      </div>

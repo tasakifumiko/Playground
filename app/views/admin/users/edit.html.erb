@@ -23,14 +23,14 @@
               <div class="form-group row">
                 <%= f.label :profile_image, '写真', class: 'col-md-4 col-form-label' %>
                 <div class="col-md-6">
-                  <%= f.file_field :images, multiple: true %>
+                  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/jpg, image/png" %>
                 </div>
               </div>
               
-              <td style="width: 30%">会員ステータス</td>
+              <td style="width: 30%"><%= f.label :is_deleted,"会員ステータス", class:'col-md-5 col-form-label'%></td>
                 <td>
-                  <%= f.radio_button :is_customer_deleted, :false %><%= f.label :is_customer_deleted, "有効" %>&emsp;
-                  <%= f.radio_button :is_customer_deleted, :true %><%= f.label :is_customer_deleted, "退会" %>
+                  <%= f.radio_button :is_deleted, :false %><%= f.label :is_deleted, "有効" %>&emsp;
+                  <%= f.radio_button :is_deleted, :true %><%= f.label :is_deleted, "退会" %>
                 </td>
               
               <div class="form-group row">

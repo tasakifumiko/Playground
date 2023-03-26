@@ -26,6 +26,16 @@
                     <% end %>
                   </li>
                   <li>
+                    <%= link_to admin_genres_path, class: 'nav-link text-dark' do %>
+                    <i class="fa-solid fa-place-of-worship"></i>ジャンル一覧
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to admin_areas_path, class: 'nav-link text-dark' do %>
+                    <i class="fa-solid fa-location-dot"></i>エリア一覧
+                    <% end %>
+                  </li>
+                  <li>
                     <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do %>
                     <i class="fa-solid fa-right-from-bracket"></i>ログアウト
                     <% end %>
@@ -68,7 +78,7 @@
                   </li>
                   <li>
                     <%= link_to about_path, class: 'nav-link text-dark' do %>
-                    <i class="fa-solid fa-users"></i>About us
+                    <i class="fa-solid fa-place-of-worship"></i>About
                     <% end %>
                   </li>
                   <li>
@@ -81,18 +91,13 @@
                     <i class="fa-solid fa-right-to-bracket"></i>ログイン
                     <% end %>
                   </li>
+                  <div class = "top_btn"><%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, class: "btn btn-success btn-sm", method: :post %></div>
               <% end %>
-         
-              
-              
-              <!--<li>-->
-              <!--  <%#= link_to new_user_session_path, class: 'nav-link text-dark' do %>-->
-              <!--  <i class="fa-solid fa-right-to-bracket"></i>ログイン-->
-              <!--  <%# end %>-->
-              <!--</li>-->
-              
         </ul>
       </div>
     </div>
   </nav>
 </header>
+<div class="row justify-content-center">
+      <p class="text-primary mt-3" ><%= flash[:notice] %></p>
+</div>

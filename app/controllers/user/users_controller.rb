@@ -18,11 +18,22 @@ class User::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] =  "You habe updated user successfully."
+      flash[:notice] =  "更新しました！"
       redirect_to user_path(@user)
     else
       render :edit
     end
+  end
+  
+  def unsubscribe
+  end 
+  
+  def withdraw
+    @user = User.find(current_user.id)
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行しました！"
+    redirect_to root_path
   end
 
     private

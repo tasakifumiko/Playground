@@ -1,7 +1,7 @@
 class Admin::PostsController < ApplicationController
    before_action :authenticate_admin!
   def index
-     @posts = Post.all
+     @posts = Post.all.order(created_at: :desc) 
      @post = Post.new
   end
   
@@ -10,15 +10,4 @@ class Admin::PostsController < ApplicationController
     @review= Review.new
   end
   
-  # def update
-  #   byebug
-  #   review = Review.find(params[:id])
-  #   review.update(review_params)
-  #   redirect_to admin_post_path(review.post.id)
-  # end
-  
-  # def review_params
-  #   params.require(:review).permit(:visible)
-  # end
-
 end

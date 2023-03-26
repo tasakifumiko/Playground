@@ -1,9 +1,8 @@
 <div class="row">
   <% posts.each do |post| %>
     <div class="col-md-4">
-      <a href="/posts/<%= post.id %>" class="card-body text-dark">
-      <div class="card">
-
+      <div class="card mt-3">
+        <a href="/posts/<%= post.id %>" class="card-body text-dark">
         <%= image_tag post.get_image[0], class: 'img-fluid card-img-top user-show-card-img' %>
         <div class="card-body">
           <h6 class="card-title font-weight-bold mb-3">
