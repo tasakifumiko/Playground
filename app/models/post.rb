@@ -4,8 +4,14 @@ class Post < ApplicationRecord
   belongs_to :area
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  # has_many :bookmark_posts, through: :bookmarks, source: :post
   has_many_attached :images, dependent: :destroy
+  
+  validates :playground, presence: true
+  validates :title, presence: true
+  validates :text, presence: true
+  validates :genre_id, presence: true
+  validates :area_id, presence: true
+  validates :images, presence: true
 
 
   def get_image

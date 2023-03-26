@@ -1,0 +1,23 @@
+<div class='container px-5 px-sm-0'>
+  <h4 class="font-weight-normal mt-3">検索ページ</h4>
+  <div class="popular-heading common-heading">キーワード検索</div>
+        <%= render 'user/searches/search_form' %>
+
+    <!--<div class="row justify-content-center">-->
+      
+
+      <tble>
+      <div class="popular-heading common-heading">エリアで絞る</div>
+          <%= render 'user/areas/search_form' %>
+
+      <div class="popular-heading common-heading">タグで絞る</div>
+          <%= render 'user/genres/search_form', genre: @genre, post: @posts %>
+      </table>
+
+      <div class="tag-box">
+      <%= link_to "全ての投稿", posts_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+
+      <%= render 'user/users/index', posts: @posts %>
+</div>

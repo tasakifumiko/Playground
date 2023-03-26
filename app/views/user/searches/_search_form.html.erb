@@ -1,0 +1,6 @@
+<div>
+        <%= form_with url: filter_path, local: true, method: :post do |f| %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "filter", class: ""  %>
+        <% end %>
+      </div>

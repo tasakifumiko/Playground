@@ -1,20 +1,46 @@
-<h2>プロフィール編集</h2>
-<%= form_with model: @user do |f| %>
-  <div class="field">
-    <%= f.label :full_name %><br>
-    <%= f.text_field :full_name, autofocus: true, autocomplete: "name" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "name" %>
-  </div>
-  
-  <div class="field">
-  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-  </div>
-  
-  <div class="actions">
-  <%= f.submit "変更を保存" %>
-  </div>
-<% end %>
+<div class="cover-new">
+  <div class="container">
+    <div class="row justify-content-center">
+      <h4 class="font-weight-normal mt-3"><%= @user.user_name %>さんの会員情報編集</h4>
+    </div>
+        <p><div class="row justify-content-center">
+            <%= form_with model: @user do |f| %>
+              <tr>
+                <td style="width: 30%"><%= f.label :id,"会員ID", class:'col-md-5 col-form-label'%></td> 
+                <td><%= @user.id %></td>
+              </tr>
+              
+              <div class="form-group row">
+                <%= f.label :full_name, class:'col-md-5 col-form-label'%><br>
+                <%= f.text_field :full_name, autofocus: true, autocomplete: "name" %>
+              </div>
+              
+              <div class="form-group row">
+                <%= f.label :user_name, class:'col-md-5 col-form-label' %><br>
+                <%= f.text_field :user_name, autofocus: true, autocomplete: "name" %>
+              </div>
+              
+              <div class="form-group row">
+                <%= f.label :profile_image, '写真', class: 'col-md-4 col-form-label' %>
+                <div class="col-md-6">
+                  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/jpg, image/png" %>
+                </div>
+              </div>
+              
+              <td style="width: 30%"><%= f.label :is_deleted,"会員ステータス", class:'col-md-5 col-form-label'%></td>
+                <td>
+                  <%= f.radio_button :is_deleted, :false %><%= f.label :is_deleted, "有効" %>&emsp;
+                  <%= f.radio_button :is_deleted, :true %><%= f.label :is_deleted, "退会" %>
+                </td>
+              
+              <div class="form-group row">
+                <div class="col-md-6 offset-md-4">
+                  <%= f.submit '変更を保存', class: "btn btn-success btn-sm" %>
+                </div>
+              </div>
+              
+            
+            <% end %>
+        </div>
+    </div>
+</div>

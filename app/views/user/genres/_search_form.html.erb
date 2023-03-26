@@ -1,0 +1,5 @@
+<% @genres.each do |genre| %>
+  <div class="tag-box">
+    <%= link_to genre.name, genre_path(genre.id) %></br>
+  </div>
+<% end %>

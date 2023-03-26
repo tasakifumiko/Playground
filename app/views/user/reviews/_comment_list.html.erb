@@ -1,0 +1,35 @@
+<div>
+<div id= "review_comments-count">コメント件数：<%= reviews.count %></div>
+ <% reviews.each do |review| %>
+  <p><%= image_tag review.user.get_profile_image(30,30), class: 'rounded-circle' %><%= review.user.user_name %>
+  <small class="text-black-50"><%= review.created_at.strftime('%Y/%m/%d') %></small><br>
+  <%= review.comment %><br>
+<!--星評価　-->
+  <div class="rate_view" data-score="<%=review.score%>"></div></p>
+
+
+  <% if review.user == current_user %>
+   <td><%= link_to 'Destroy', post_review_path(@post.id, review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger", remote: true %></td>
+
+  <% end %>
+ <% end %>
+        <script>
+        $(document).on('turbolinks:load', function () {
+          $('.rate_view').empty();
+          let elements = document.getElementsByClassName('rate_view');
+          for( let i = 0;i < elements.length; i++) {
+            let element = elements[i];
+            raty(element, {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              readOnly: true,
+              score: function() {
+                return $(this).attr('data-score');
+              },
+            });
+        　}
+        });
+        </script>
+<!--星評価ここまで-->
+</div>

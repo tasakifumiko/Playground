@@ -54,3 +54,8 @@ genres = [
 genres.each do |genre|
   Genre.create(name: genre)
 end
+
+Admin.create!(
+   email: 'admin@a',
+   password: 'admin01'
+)
