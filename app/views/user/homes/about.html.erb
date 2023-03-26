@@ -1,6 +1,47 @@
+<div class="haikei">
+  <div class="container h-100">
+    <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+      <h1>Playground</h1>
+      <p>
+       <h5>子どもとの時間を全力でたのしく過ごせるように</h5>
+       <p class="text-center">子どもたちと遊べる場所を探しているパパとママたちへ。</br>
+        おすすめの遊び場を共有して、新しい遊び場へ子どもたちと繰り出してみませんか？</br>
+        おうちの周りにも、意外と知らない楽しい遊び場があるかもしれません。</br>
+        みんなで子どもたちとのかけがえのない時間を作っていけたら...
+        そんな思いでこのサイトをつくりました。
+       </p>
+    </div>
+  </div>
+</div>
 <div class='container px-5 px-sm-0'>
   <h2 class ="col-md-4 my-3">投稿一覧</h2>
-    
-      <%= render 'user/users/index', posts: @posts %>
-
+  <p>（投稿の詳細は会員登録後にご覧いただけます）
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-md-4">
+          <div class="card mt-3">
+            <%= image_tag post.get_image[0], class: 'img-fluid card-img-top user-show-card-img' %>
+            <div class="card-body">
+              <h6 class="card-title font-weight-bold mb-3">
+                <%= post.title %>
+              </h6>
+              <div class="card-text">
+                <%= image_tag post.user.get_profile_image(50,50), class: 'rounded-circle' %>
+                <%= post.user.user_name %>
+                <div class="my-3">
+                  <%= post.playground %></div>
+                <div class="mb-3">
+                  <%= post.genre.name %> | <%= post.area.name %>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <small class="text-black-50">
+                <%= post.created_at.strftime('%Y/%m/%d') %>
+              </small>
+            </div>
+          </div><!-- card end -->
+        </div>
+      <% end %>
+  </div>
 </div>

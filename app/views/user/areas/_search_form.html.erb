@@ -1,0 +1,5 @@
+<% @areas.each do |area| %>
+  <div class="tag-box">
+    <%= link_to area.name, area_path(area.id) %></br>
+  </div>
+<% end %>

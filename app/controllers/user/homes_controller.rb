@@ -4,7 +4,7 @@ class User::HomesController < ApplicationController
   end
 
   def about
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc) 
   end
 
   def new_guest
@@ -13,7 +13,7 @@ class User::HomesController < ApplicationController
     end
 
     sign_in user
-    redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました'
+    redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました！'
   end
 
 end

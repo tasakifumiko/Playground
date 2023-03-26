@@ -11,10 +11,11 @@ class User::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
+      flash[:notice] = "投稿が成功しました"
       redirect_to post_path(@post)
     else
       @posts = Post.all
-      render :index
+      render :new
     end
   end
 
@@ -25,7 +26,7 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc) 
     @post = Post.new
     @post_genre = @posts.where(genre: params[:genre])
     @genre_name = params[:genre_name]
@@ -39,7 +40,8 @@ class User::PostsController < ApplicationController
   def update
     @post= Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: "更新しました！"
+       flash[:notice] = "更新しました！"
+      redirect_to post_path(@post)
     else
       render :edit
     end
@@ -48,7 +50,8 @@ class User::PostsController < ApplicationController
   def destroy
     @post =Post.find(params[:id])
     @post.destroy
-    redirect_to user_path(current_user), notice: "投稿を削除しました"
+    flash[:notice] = "投稿を削除しました"
+    redirect_to user_path(current_user)
   end
   
 

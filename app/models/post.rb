@@ -5,6 +5,13 @@ class Post < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many_attached :images, dependent: :destroy
+  
+  validates :playground, presence: true
+  validates :title, presence: true
+  validates :text, presence: true
+  validates :genre_id, presence: true
+  validates :area_id, presence: true
+  validates :images, presence: true
 
 
   def get_image

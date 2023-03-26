@@ -5,27 +5,27 @@
 
         <%= form_with model: @user, url: user_registration_path do |f| %>
           <%= render "user/shared/error_messages", resource: resource %>
-        
+
           <div class="field">
             <%= f.label :full_name %><br>
             <%= f.text_field :full_name, autofocus: true, autocomplete: "name" %>
           </div>
-          
+
           <div class="field">
             <%= f.label :user_name %><br>
             <%= f.text_field :user_name, autofocus: true, autocomplete: "name" %>
           </div>
-          
+
           <div class="field">
           <%= f.label :"プロフィール写真" %><br>
           <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
           </div>
-          
+
           <div class="field">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           </div>
-        
+
           <div class="field">
             <%= f.label :password %>
             <% if @minimum_password_length %>
@@ -33,22 +33,18 @@
             <% end %><br />
             <%= f.password_field :password, autocomplete: "new-password" %>
           </div>
-        
+
           <div class="field">
             <%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
-        
+
           <p>
           <div class="actions">
             <%= f.submit "Sign up" , class: "btn btn-success" %>
           </div>
         <% end %>
-        
-        <div><%= link_to 'ゲストログイン(閲覧用)', posts_path, class: "btn btn-success" %></div>
-      
-        
-        <%#= render "user/shared/links", class: "btn btn-success"%>
+        <!--<%#= render "user/shared/links", class: "btn btn-success"%>-->
    </div>
   </div>
 </div>
