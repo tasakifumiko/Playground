@@ -7,13 +7,11 @@ class User::HomesController < ApplicationController
     @posts = Post.all.order(created_at: :desc) 
   end
 
-  def new_guest
-    user = User.find_or_create_by(email: 'guest@example.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
-    end
 
+  def guest_sign_in
+    user = User.guest
     sign_in user
-    redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました！'
+    redirect_to posts_path, notice: 'ゲストユーザーでログインしました。'
   end
 
 end
