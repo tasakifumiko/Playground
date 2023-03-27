@@ -45,7 +45,7 @@
                  <!--userログイン状態の際に、表示したいheaderのメニューを記載-->
                   <li>
                     <%= link_to posts_path, class: 'nav-link text-dark' do %>
-                    <i class="fa-solid fa-house"></i>投稿一覧
+                    <i class="fa-solid fa-house"></i>新着投稿一覧
                     <% end %>
                   </li>
                   <li>
@@ -91,7 +91,6 @@
                     <i class="fa-solid fa-right-to-bracket"></i>ログイン
                     <% end %>
                   </li>
-                  <div class = "top_btn"><%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, class: "btn btn-success btn-sm", method: :post %></div>
               <% end %>
         </ul>
       </div>
