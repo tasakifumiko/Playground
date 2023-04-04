@@ -22,11 +22,11 @@
                   <strong class="text-dark">非公開</strong>
                 <% end %>
             </td>
-            <td><% if review.comment_score < 0 %>
+            <td><% if !review.comment_score.nil? && review.comment_score < 0 %>
                   <i class="fa-solid fa-circle-exclamation" style="color: red;"></i>
                 <% end %>
             </td>
-              
+
           </tr>
         <% end %>
     </tbody>
