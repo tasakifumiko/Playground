@@ -2,14 +2,14 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-# local:
-#   service: Disk
-#   root: <%= Rails.root.join("storage") %>
-
-# VisionAPIを使用する場合は以下12行目までを使用
 local:
   service: Disk
-  root: <%= Rails.root.join("public/uploads") %>
+  root: <%= Rails.root.join("storage") %>
+
+## VisionAPIを使用する場合は以下12行目までを使用
+#local:
+#  service: Disk
+#  root: <%= Rails.root.join("public/uploads") %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
