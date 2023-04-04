@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :genre
   belongs_to :area
+  has_many :tags
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many_attached :images, dependent: :destroy

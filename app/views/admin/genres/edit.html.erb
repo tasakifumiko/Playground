@@ -1,15 +1,20 @@
-<div class="mt-4">
-  <div class="col-md-8">
-
-    <h4><span class="bg-light">ジャンル情報編集<span></h4>
-    <div class="mt-4">
-      <%= form_with model: @genre, url: admin_genre_path, method: :patch, local:true do |f| %>
-        <div class="form-group">
-            <%= f.label :name, "ジャンル名" %>
-            <%= f.text_field :name  %>
-            <%= f.submit '変更を保存', class: 'btn btn-success' %>
-        </div>
-      <% end %>
+<div class="cover-new">
+  <div class="container">
+    <div class="row justify-content-center">
+      <h4 class="font-weight-normal mt-3">ジャンル情報編集中•••</h4>
     </div>
+     <p>
+       <div class="row justify-content-center">
+          <%= form_with model: @genre, url: admin_genre_path, method: :patch, local:true do |f| %>
+            <tr>
+              <td style="width: 30%"><%= f.label :name, "ジャンル名", class:'col-md-5 col-form-label' %></td>
+              <td><%= f.text_field :name %></td>
+            </tr>
+            
+            <td><%= f.submit '変更を保存', class: 'btn btn-sm btn-success ml-auto' %></td>
+            <td></td>
+            <td><%= link_to '削除する', @genre, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger ml-auto"%></td>
+          <% end %>
+       </div>
   </div>
 </div>

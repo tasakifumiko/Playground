@@ -18,8 +18,8 @@ get '/about' => "user/homes#about", as:"about"
 namespace :admin do
   root to: 'homes#top'
   resources :users, only: [:index, :show, :edit, :update]
-  resources :areas, only: [:index, :create, :edit, :update]
-  resources :genres, only: [:index, :create, :edit, :update]
+  resources :areas, only: [:index, :create, :edit, :update, :destroy]
+  resources :genres, only: [:index, :create, :edit, :update, :destroy]
   resources :posts, only: [:index, :show, :edit, :update] do
     resources :reviews, only: [:create, :destroy, :index, :show, :update]
   end

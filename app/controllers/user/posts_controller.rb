@@ -1,7 +1,7 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  
+
 
 
   def new
@@ -13,6 +13,16 @@ class User::PostsController < ApplicationController
     @post.user = current_user
     if @post.save
       flash[:notice] = "投稿が成功しました"
+      
+      # visionAPI導入時以下使用
+      # tags = Vision.get_image_data(@post.images.first)
+      # tags.each do |tag|
+      #   p '-------'
+      #   p tag
+      #   p '-------'
+      #   # @post.tags.create(name: tag)
+      # end
+      
       redirect_to post_path(@post)
     else
       @posts = Post.all
@@ -27,11 +37,11 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc) 
+    @posts = Post.all.order(created_at: :desc)
     @post = Post.new
     @post_genre = @posts.where(genre: params[:genre])
     @genre_name = params[:genre_name]
-    
+
   end
 
 
@@ -41,7 +51,7 @@ class User::PostsController < ApplicationController
   def update
     @post= Post.find(params[:id])
     if @post.update(post_params)
-       flash[:notice] = "更新しました！"
+       flash[:notice] = "更新しました"
       redirect_to post_path(@post)
     else
       render :edit
@@ -54,7 +64,7 @@ class User::PostsController < ApplicationController
     flash[:notice] = "投稿を削除しました"
     redirect_to user_path(current_user)
   end
-  
+
 
   private
 
