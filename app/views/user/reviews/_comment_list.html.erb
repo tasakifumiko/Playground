@@ -1,18 +1,35 @@
-<div>
-<div id= "review_comments-count">コメント件数：<%= reviews.count %></div>
- <% reviews.each do |review| %>
-  <p><%= image_tag review.user.get_profile_image(30,30), class: 'rounded-circle' %><%= review.user.user_name %>
-  <small class="text-black-50"><%= review.created_at.strftime('%Y/%m/%d') %></small><br>
-  <%= review.comment %><br>
+<div class="container">
+ <div class="row">
+  <div class="col-sm-12 col-md-11 col-lg-11  mx-auto">
+   <br>
+     <div id= "review_comments-count">コメント件数：<%= reviews.count %></div>
+      <div class= 'table table-light'>
+       <% reviews.each do |review| %>
+         <div class="row mb-3">
+           <div class="col-1">
+             <%= image_tag review.user.get_profile_image(30,30), class: 'rounded-circle' %>
+           </div>
+           <div class="col-8">
+             <%= review.user.user_name %>
+           </div>
+           <div class="col-12">
+              <small class="text-black-50">
+                <%= review.created_at.strftime('%Y/%m/%d') %>
+              </small>
+           </div>
+           <div class="col-12">
+              <div class="rate_view" data-score="<%=review.score%>"></div>
+           </div>
+           <div class="col-12">
+              <%= review.comment %><br>
+              <% if review.user == current_user %>
+               <%= link_to 'Destroy', post_review_path(@post.id, review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger", remote: true %></td>
+              <% end %>
+           </div>
+         </div>
+       <% end %>
+     </div>
 <!--星評価　-->
-  <div class="rate_view" data-score="<%=review.score%>"></div></p>
-
-
-  <% if review.user == current_user %>
-   <td><%= link_to 'Destroy', post_review_path(@post.id, review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger", remote: true %></td>
-
-  <% end %>
- <% end %>
         <script>
         $(document).on('turbolinks:load', function () {
           $('.rate_view').empty();
@@ -32,4 +49,6 @@
         });
         </script>
 <!--星評価ここまで-->
+   </div>
+  </div>
 </div>

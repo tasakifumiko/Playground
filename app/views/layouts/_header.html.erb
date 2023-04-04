@@ -8,11 +8,11 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
-             
+
                  <!--admin側のheaderを返す-->
                    <li>
                     <%= link_to admin_root_path, class: 'nav-link text-dark' do %>
-                    <i class="fa-solid fa-house"></i>Top
+                    <i class="fa-solid fa-comment"></i>コメント一覧
                     <% end %>
                   </li>
                   <li>
@@ -27,7 +27,7 @@
                   </li>
                   <li>
                     <%= link_to admin_genres_path, class: 'nav-link text-dark' do %>
-                    <i class="fa-solid fa-place-of-worship"></i>ジャンル一覧
+                    <i class="fa-solid fa-star"></i>ジャンル一覧
                     <% end %>
                   </li>
                   <li>
@@ -40,7 +40,7 @@
                     <i class="fa-solid fa-right-from-bracket"></i>ログアウト
                     <% end %>
                   </li>
-                  
+
               <% elsif user_signed_in? %>
                  <!--userログイン状態の際に、表示したいheaderのメニューを記載-->
                   <li>
@@ -68,7 +68,7 @@
                     <i class="fa-solid fa-right-from-bracket"></i>ログアウト
                     <% end %>
                   </li>
-                  
+
                 <% else %>
                  <!--adminでもuserでもログインしていない時に表示するheaderのメニューを記載-->
                   <li>
@@ -78,7 +78,7 @@
                   </li>
                   <li>
                     <%= link_to about_path, class: 'nav-link text-dark' do %>
-                    <i class="fa-solid fa-place-of-worship"></i>About
+                    <i class="fa-solid fa-seedling"></i>About
                     <% end %>
                   </li>
                   <li>

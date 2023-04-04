@@ -6,6 +6,7 @@ class User::ReviewsController < ApplicationController
     @reviews = @post.reviews.where(visible: true)
     comment = current_user.reviews.new(review_params)
     comment.post_id = @post.id
+    comment.comment_score = Language.get_data(review_params[:comment])
     comment.save
   end
 

@@ -1,6 +1,6 @@
-<div>
-        <%= form_with url: filter_path, local: true, method: :post do |f| %>
-          <%= f.text_field :keyword %>
-          <%= f.submit "filter", class: ""  %>
-        <% end %>
-      </div>
+<div class ="search-form mb-3">
+  <%= form_with url: filter_path, local: true, method: :post do |f| %>
+    <%= f.text_field :keyword %>
+    <%= f.submit "filter", class: ""  %>
+  <% end %>
+</div>

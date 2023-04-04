@@ -1,7 +1,9 @@
 class Admin::ReviewsController < ApplicationController
   
   def index
+    @review = Review.find(params[:post_id])
     @reviews = Review.all
+    comment_score.review_id = @review.id
   end
   
   def show

@@ -1,30 +1,34 @@
 <table class='table'>
-       <thead class="table table-light">
-        <tr>
-          <th>コメントした人</th>
-          <th>投稿ID</th>
-          <th>コメント内容</th>
-          <th>コメント時間</th>
-          <th>公開状況</th>
-        </tr>
-       </thead>
-         <tbody>
-              <% reviews.each do |review| %>
-                <tr>
-                  <td><%= link_to(review.user.user_name, admin_user_path(review.user.id)) %></td>
-                  <td><%= link_to(review.post_id, admin_post_path(review.post.id)) %></td>
-                  <td><%= review.comment %></td>
-                  <td><%= review.post.created_at.strftime('%Y/%m/%d') %></td>
-                  <td><% if review.visible == true  %>
-                        <strong class="text-success">公開中</strong>
-                      <% else %>
-                        <strong class="text-denger">非公開</strong>
-                      <% end %>
-                  </td>
-                  
-                  
-                </tr>
-              <% end %>
-          </tbody>
+ <thead class="table table-light">
+  <tr>
+    <th>コメントした人</th>
+    <th>投稿ID</th>
+    <th>コメント内容</th>
+    <th>コメント時間</th>
+    <th>公開状況</th>
+    <th>問題のあるコメント</th>
+  </tr>
+ </thead>
+   <tbody>
+        <% reviews.each do |review| %>
+          <tr>
+            <td><%= link_to(review.user.user_name, admin_user_path(review.user.id)) %></td>
+            <td><%= link_to(review.post_id, admin_post_path(review.post.id)) %></td>
+            <td><%= review.comment %></td>
+            <td><%= review.post.created_at.strftime('%Y/%m/%d') %></td>
+            <td><% if review.visible == true  %>
+                  <strong class="text-success">公開中</strong>
+                <% else %>
+                  <strong class="text-dark">非公開</strong>
+                <% end %>
+            </td>
+            <td><% if review.comment_score < 0 %>
+                  <i class="fa-solid fa-circle-exclamation" style="color: red;"></i>
+                <% end %>
+            </td>
+              
+          </tr>
+        <% end %>
+    </tbody>
 </table>
 
